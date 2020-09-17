@@ -21,6 +21,7 @@ jobs:
 
     - name: Checkout code  
       uses: actions/checkout@v2
+      fetch-depth: 10
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -33,7 +34,7 @@ jobs:
     
     - name: get commit message
       run: |
-        echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
+        echo ::set-env name=commitmsg::$(git log --format=%B ${{ github.event.before }}^..${{ github.event.after }})
 
     - name: Run PayID
       env:
