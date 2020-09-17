@@ -15,8 +15,8 @@ jobs:
 
     steps:
     - name : GITHUB CONTEXT
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
 
     - name: Checkout code  
