@@ -37,7 +37,7 @@ def get_address_from_payid(payid, network, environment):
             return address['addressDetails']['address']
 
 def find_all_payids(msg):
-    return re.findall(r'(\S+\$\S+)', msg)
+    return re.findall(r'(\S+\$\S+\.\S+)', msg)
 
 if __name__ == '__main__':
 
