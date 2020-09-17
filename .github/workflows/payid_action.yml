@@ -14,14 +14,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+    - name: Checkout code  
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+
     - name: Get prev commit hash
       id: vars
       shell: bash
       run: |
-        echo "::set-output name=sha_prev::$(git rev-parse --short HEAD^2)"
-
-    - name: Checkout code  
-      uses: actions/checkout@v2
+        echo "::set-output name=sha_prev::$(git rev-parse --short HEAD^1)"
 
     - name: Checkout prior code  
       uses: actions/checkout@v2
