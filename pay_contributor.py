@@ -2,6 +2,8 @@ import xpring
 import requests
 import re
 import os
+from pathlib import Path
+import ast
 
 def pay_xrp_testnet(wallet_seed, address, amount):
     # Create a wallet instance using the seed
@@ -39,7 +41,27 @@ def get_address_from_payid(payid, network, environment):
 def find_all_payids(msg):
     return re.findall(r'(\S+\$\S+)', msg)
 
+def find_all_variable_names(filename):
+    root = ast.parse(filename=filename)
+    names = {node.id for node in ast.walk(root) if isinstance(node, ast.Name)}
+    return names
+
+def find_all_variable_names_in_dir(path):
+    all_names = set()
+    filenames = path.glob('**/*.py')
+    for filename in filenames:
+        all_names |= find_all_variable_names(str(filename))
+
+    return all_names
+
 if __name__ == '__main__':
+    old_varnames = find_all_variable_names_in_dir('.old-code')
+    new_varnames = find_all_variable_names_in_dir('.new-code')
+    print('old', old_varnames)
+    print('new', new_varnames)
+
+if __name__ == 'X__main__':
+
     print("running pay contributor")
 
     commitmsg = os.environ.get('commitmsg')
