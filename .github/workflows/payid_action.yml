@@ -32,7 +32,7 @@ jobs:
       uses: hammertoe/payid_action@master
       with:
         wallet_secret: ${{ secrets.PAYID_WALLET_SECRET }}
-	amount: 1000000
-	commit_log: %{{ env.commit_log }}
+        amount: 1000000
+        commit_log: %{{ env.commit_log }}
 
         
