@@ -51,11 +51,14 @@ if __name__ == '__main__':
 
         for payid in payids:
             address = get_address_from_payid(payid, 'XRPL', 'TESTNET')
-            print(f"Address found for {payid} is {address}")
+            if address:
+                print(f"Address found for {payid} is {address}")
 
-            amount = 1000000
+                amount = 1000000
 
-            pay_xrp_testnet(secret, address, amount)
+                pay_xrp_testnet(secret, address, amount)
+            else:
+                print("No address found for payid:", payid)
 
     else:
         print("No commit message, nothing to do")

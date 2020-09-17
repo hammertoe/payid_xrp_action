@@ -9,16 +9,29 @@ on:
 
 
 jobs:
-  deploy:
+  pay:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2  
+    - name: Checkout code  
+      uses: actions/checkout@v2
+
+    - name: Checkout prior code  
+      uses: actions/checkout@v2
+      ref: HEAD^1
+      path: .old-code
+
+    - name: Checkout current code  
+      uses: actions/checkout@v2
+      ref: HEAD
+      path: .new-code
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
@@ -33,6 +46,8 @@ jobs:
     - name: Run PayID
       env:
         PAYID_WALLET_SECRET: ${{ secrets.PAYID_WALLET_SECRET }}
+        changed_files: ${{ steps.file_changes.outputs.files_modified }}
+        added_files: ${{ steps.file_changes.outputs.files_added }}
       run: |
         python pay_contributor.py
         
