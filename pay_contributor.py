@@ -3,12 +3,12 @@ import requests
 import re
 import os
 
-def pay_xrp_testnet(wallet_seed, address, amount):
+def pay_xrp(url, wallet_seed, address, amount):
     # Create a wallet instance using the seed
     wallet = xpring.Wallet.from_seed(wallet_seed)
 
-    # The XRP testnet
-    url = 'test.xrp.xpring.io:50051'
+    # Create client instance
+    print("Creating connection to:", url)
     client = xpring.Client.from_url(url)
 
     # Create a transaction
@@ -22,6 +22,7 @@ def pay_xrp_testnet(wallet_seed, address, amount):
 def get_address_from_payid(payid, network, environment):
     # Convert the PayID into a URL e.g.
     # pay$username.github.io -> https://username.github.io/pay
+    print("Getting PayId:", payid, network, environment)
     local_part, domain = payid.split('$')
     url = f'https://{domain}/{local_part}'
     response = requests.get(url)
@@ -47,20 +48,27 @@ if __name__ == '__main__':
     secret = os.environ['INPUT_WALLET_SECRET']
     amount = int(os.environ['INPUT_AMOUNT'])
     max_payout = int(os.environ['INPUT_MAX_PAYOUT'])
+    environment = os.environ['INPUT_ENVIRONMENT']
+    server = os.environ['INPUT_SERVER']
 
     print("commit message:", commitmsg)
     payids = find_all_payids(commitmsg)
-    print("Payids found:", payids)
+    num = len(payids)
 
-    # Ensure the total max payout is respected
-    amount = int(min(amount, max_payout / len(payids)))
+    if num > 0:
+        print("PayIds found:", payids)
 
-    # Pay each payid
-    for payid in payids:
-        address = get_address_from_payid(payid, 'XRPL', 'TESTNET')
-        if address:
-            print(f"Address found for {payid} is {address}, paying {amount}")
-            pay_xrp_testnet(secret, address, amount)
-        else:
-            print("No address found for payid:", payid)
+        # Ensure the total max payout is respected
+        amount = int(min(amount, max_payout / num))
 
+        # Pay each payid
+        for payid in payids:
+            address = get_address_from_payid(payid, 'XRPL', environment)
+            if address:
+                print(f"Address found for {payid} is {address}, paying {amount}")
+                pay_xrp(server, secret, address, amount)
+            else:
+                print("No address found for payid:", payid)
+
+    else:
+        print("No PayIds found")

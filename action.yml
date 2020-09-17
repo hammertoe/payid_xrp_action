@@ -1,5 +1,5 @@
-name: 'PayId Action'
-description: 'Scan commit messages for PayId and make payment to that PayId on push'
+name: 'Automatically pay Contributors in XRP via PayId'
+description: 'Scan commit messages for PayId and make payment to that PayId in XRP on push'
 author: 'Matt Hamilton'
 inputs:
   amount:
@@ -14,6 +14,12 @@ inputs:
   max_payout: 
     description: 'Maximum number of drops to pay out'
     default: 10000000
+  environment:
+    description: 'Environment to use, TESTNET or LIVENET'
+    default: 'TESTNET'
+  server:
+    description: 'XRP Ledger server to use'
+    default: 'test.xrp.xpring.io:50051'
 runs:
   using: 'docker'
   image: 'Dockerfile'
