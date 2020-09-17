@@ -48,7 +48,7 @@ def find_all_variable_names(filename):
 
 def find_all_variable_names_in_dir(path):
     all_names = set()
-    filenames = path.glob('**/*.py')
+    filenames = Path(path).glob('**/*.py')
     for filename in filenames:
         all_names |= find_all_variable_names(str(filename))
 
