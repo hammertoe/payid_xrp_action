@@ -1,8 +1,9 @@
 name: 'Automatically pay Contributors in XRP via PayId'
 description: 'Scan commit messages for PayId and make payment to that PayId in XRP on push'
 author: 'Matt Hamilton'
-icon: dollar-sign
-color: green
+branding:
+  icon: dollar-sign
+  color: green
 inputs:
   amount:
     description: 'Amount of XRP in drops to pay each PayId found'
