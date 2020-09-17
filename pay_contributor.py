@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     commitmsg = os.environ.get('commitmsg')
     secret = os.environ.get('PAYID_WALLET_SECRET')
-    amount = os.environ.get('amount', 0)
+    amount = os.environ.get('amount', 1000000)
     amount = int(amount)
 
     if commitmsg and secret and amount:
@@ -62,4 +62,4 @@ if __name__ == '__main__':
                 print("No address found for payid:", payid)
 
     else:
-        print("No commit message, nothing to do")
+        print("Need commit message, secret, and amount, nothing to do")
