@@ -17,25 +17,6 @@ jobs:
 
     - name: Checkout code  
       uses: actions/checkout@v2
-      with:
-        fetch-depth: 5
-
-    - name: Get prev commit hash
-      id: vars
-      shell: bash
-      run: |
-        echo "::set-output name=sha_prev::$(git rev-parse HEAD^1)"
-
-    - name: Checkout prior code  
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ steps.vars.outputs.sha_prev }}
-        path: .old-code
-
-    - name: Checkout current code  
-      uses: actions/checkout@v2
-      with:
-        path: .new-code
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -49,9 +30,6 @@ jobs:
     - name: get commit message
       run: |
         echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
-
-    - name: show commit message
-      run : echo $commitmsg
 
     - name: Run PayID
       env:
