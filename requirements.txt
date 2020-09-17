@@ -1,2 +1,2 @@
-xpring
+xpring[py]
 requests
