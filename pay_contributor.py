@@ -42,7 +42,8 @@ def find_all_payids(msg):
     return re.findall(r'(\S+\$\S+)', msg)
 
 def find_all_variable_names(filename):
-    root = ast.parse(filename=filename)
+    root = ast.parse(open(filename).read(), 
+                     filename=filename)
     names = {node.id for node in ast.walk(root) if isinstance(node, ast.Name)}
     return names
 
