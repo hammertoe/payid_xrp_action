@@ -19,13 +19,15 @@ jobs:
 
     - name: Checkout prior code  
       uses: actions/checkout@v2
-      ref: HEAD^1
-      path: .old-code
+      with:
+        ref: HEAD^1
+        path: .old-code
 
     - name: Checkout current code  
       uses: actions/checkout@v2
-      ref: HEAD
-      path: .new-code
+      with:
+        ref: HEAD
+        path: .new-code
 
     - name: Set up Python
       uses: actions/setup-python@v2
