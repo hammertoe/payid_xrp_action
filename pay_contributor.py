@@ -43,7 +43,8 @@ if __name__ == '__main__':
     print("running pay contributor")
 
     commitmsg = os.environ.get('commitmsg')
-    if commitmsg:
+    secret = os.environ.get('PAYID_WALLET_SECRET')
+    if commitmsg and secret:
         print("commit message:", commitmsg)
         payids = find_all_payids(commitmsg)
         print("Payids found:", payids)
@@ -51,6 +52,10 @@ if __name__ == '__main__':
         for payid in payids:
             address = get_address_from_payid(payid, 'XRPL', 'TESTNET')
             print(f"Address found for {payid} is {address}")
+
+            amount = 1000000
+
+            pay_xrp_testnet(secret, address, amount)
 
     else:
         print("No commit message, nothing to do")
