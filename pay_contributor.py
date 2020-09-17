@@ -36,8 +36,16 @@ def get_address_from_payid(payid, network, environment):
            address['environment'] == environment:
             return address['addressDetails']['address']
 
-def find_all_payids():
-    pass
+def find_all_payids(msg):
+    return re.findall(r'(\S+\$\S+)', msg)
 
 if __name__ == '__main__':
     print("running pay contributor")
+
+    commitmsg = os.environ('commitmsg')
+    if commitmsg:
+        print("commit message:", commitmsg)
+        payids = find_all_payids(commitmsg)
+        print("Payids found:", payids)
+    else:
+        print("No commit message, nothing to do")
