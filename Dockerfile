@@ -14,4 +14,4 @@ RUN apt-get update \
 
 ENTRYPOINT ["python"]
 
-CMD ["app/pay_contributor.py"]
+CMD ["pay_contributor.py"]
