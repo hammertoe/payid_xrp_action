@@ -22,9 +22,17 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+    
+    - name: get commit message
+      run: |
+        echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
+
+    - name: show commit message
+      run : echo $commitmsg
+
     - name: Run PayID
       env:
         PAYID_WALLET_SECRET: ${{ secrets.PAYID_WALLET_SECRET }}
       run: |
-        echo Hello world
+        python pay_contributor.py
         
