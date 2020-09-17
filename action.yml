@@ -1,0 +1,19 @@
+name: 'PayId Action'
+description: 'Scan commit messages for PayId and make payment to that PayId on push'
+author: 'Matt Hamilton'
+inputs:
+  amount:
+    description: 'Amount of XRP in drops to pay each PayId found'
+    default: 1000000
+  commit_log:
+    description: 'The commit message(s) to scan for PayIds'
+    required: true
+  wallet_secret:
+    descrption: 'The secret key of the XRP wallet to pay from'
+    required: true
+  max_payout: 
+    description: 'Maximum number of drops to pay out'
+    default: 10000000
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

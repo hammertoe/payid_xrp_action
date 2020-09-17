@@ -42,23 +42,25 @@ def find_all_payids(msg):
 if __name__ == '__main__':
     print("running pay contributor")
 
-    commitmsg = os.environ.get('commitmsg')
-    secret = os.environ.get('PAYID_WALLET_SECRET')
-    amount = os.environ.get('amount', 1000000)
-    amount = int(amount)
+    # Get out intputs from the environment
+    commitmsg = os.environ['INPUT_COMMIT_LOG']
+    secret = os.environ['INPUT_WALLET_SECRET']
+    amount = int(os.environ['INPUT_AMOUNT'])
+    max_payout = int(os.environ['INPUT_MAX_PAYOUT'])
 
-    if commitmsg and secret and amount:
-        print("commit message:", commitmsg)
-        payids = find_all_payids(commitmsg)
-        print("Payids found:", payids)
+    print("commit message:", commitmsg)
+    payids = find_all_payids(commitmsg)
+    print("Payids found:", payids)
 
-        for payid in payids:
-            address = get_address_from_payid(payid, 'XRPL', 'TESTNET')
-            if address:
-                print(f"Address found for {payid} is {address}, paying {amount}")
-                pay_xrp_testnet(secret, address, amount)
-            else:
-                print("No address found for payid:", payid)
+    # Ensure the total max payout is respected
+    amount = int(min(amount, max_payout / len(payids)))
 
-    else:
-        print("Need commit message, secret, and amount, nothing to do")
+    # Pay each payid
+    for payid in payids:
+        address = get_address_from_payid(payid, 'XRPL', 'TESTNET')
+        if address:
+            print(f"Address found for {payid} is {address}, paying {amount}")
+            pay_xrp_testnet(secret, address, amount)
+        else:
+            print("No address found for payid:", payid)
+

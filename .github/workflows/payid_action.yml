@@ -24,22 +24,15 @@ jobs:
       with:
         fetch-depth: 10
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-    
     - name: get commit message
       run: |
-        echo ::set-env name=commitmsg::$(git log --format=%B ${{ github.event.before }}..${{ github.event.after }})
+        echo ::set-env name=commit_log::$(git log --format=%B ${{ github.event.before }}..${{ github.event.after }})
 
     - name: Run PayID
-      env:
-        PAYID_WALLET_SECRET: ${{ secrets.PAYID_WALLET_SECRET }}
-      run: |
-        python pay_contributor.py
+      uses: hammertoe/payid_action@master
+      with:
+        wallet_secret: ${{ secrets.PAYID_WALLET_SECRET }}
+	amount: 1000000
+	commit_log: %{{ env.commit_log }}
+
         
