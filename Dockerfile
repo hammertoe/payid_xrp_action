@@ -4,7 +4,13 @@ WORKDIR /app
 
 ADD . /app
 
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gcc libgmp3-dev python3-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --trusted-host pypi.python.org -r requirements.txt \
+    && apt-get purge -y --auto-remove gcc libgmp3-dev python3-dev
+    
+#RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 ENTRYPOINT ["python"]
 
