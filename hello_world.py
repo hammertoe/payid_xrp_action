@@ -1,3 +1,4 @@
 bilbo = "Bilbo"
-legolas = "Legolas"
-print(bilbo, legolas)
+leglas = "Legolas"
+gimli = "Gimli"
+print(bilbo, legolas, gimli)
