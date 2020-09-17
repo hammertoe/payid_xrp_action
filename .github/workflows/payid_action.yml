@@ -24,7 +24,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run PayID
       env:
-        PAYID_WALLET_SECRET = ${{ secrets.PAYID_WALLET_SECRET }}
+        PAYID_WALLET_SECRET: ${{ secrets.PAYID_WALLET_SECRET }}
       run: |
         echo Hello world
         
