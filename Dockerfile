@@ -10,8 +10,6 @@ RUN apt-get update \
     && pip install --trusted-host pypi.python.org -r requirements.txt \
     && apt-get purge -y --auto-remove gcc libgmp3-dev python3-dev
     
-#RUN pip install --trusted-host pypi.python.org -r requirements.txt
-
 ENTRYPOINT ["python"]
 
-CMD ["pay_contributor.py"]
+CMD ["/app/pay_contributor.py"]
