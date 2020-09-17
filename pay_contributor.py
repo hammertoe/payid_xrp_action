@@ -40,7 +40,6 @@ def find_all_payids(msg):
     return re.findall(r'(\S+\$\S+\.\S+)', msg)
 
 if __name__ == '__main__':
-
     print("running pay contributor")
 
     commitmsg = os.environ.get('commitmsg')
