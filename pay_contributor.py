@@ -42,7 +42,7 @@ def find_all_payids(msg):
 if __name__ == '__main__':
     print("running pay contributor")
 
-    commitmsg = os.environ('commitmsg')
+    commitmsg = os.environ.get('commitmsg')
     if commitmsg:
         print("commit message:", commitmsg)
         payids = find_all_payids(commitmsg)
