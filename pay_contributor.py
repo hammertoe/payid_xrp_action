@@ -53,13 +53,20 @@ def find_all_variable_names_in_dir(path):
     for filename in filenames:
         all_names |= find_all_variable_names(str(filename))
 
+    all_names = [x.lower() for x in all_names]
     return all_names
 
 if __name__ == '__main__':
+    lotr_names = set([ x.lower().strip() for x in open('lotr.txt').readlines() if x ])
+    print('lotr', lotr_names)
+
     old_varnames = find_all_variable_names_in_dir('.old-code')
     new_varnames = find_all_variable_names_in_dir('.new-code')
     print('old', old_varnames)
     print('new', new_varnames)
+
+    new_lotr = (new_varnames - old_varnames) & lotr_names
+    print('new lotr', new_lotr)
 
 if __name__ == 'X__main__':
 
