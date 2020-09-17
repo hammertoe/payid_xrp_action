@@ -47,5 +47,10 @@ if __name__ == '__main__':
         print("commit message:", commitmsg)
         payids = find_all_payids(commitmsg)
         print("Payids found:", payids)
+
+        for payid in payids:
+            address = get_address_from_payid(payid, 'XRPL', 'TESTNET')
+            print(f"Address found for {payid} is {address}")
+
     else:
         print("No commit message, nothing to do")
