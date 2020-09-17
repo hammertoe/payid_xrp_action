@@ -24,7 +24,7 @@ jobs:
       id: vars
       shell: bash
       run: |
-        echo "::set-output name=sha_prev::$(git rev-parse --short HEAD^1)"
+        echo "::set-output name=sha_prev::$(git rev-parse HEAD^1)"
 
     - name: Checkout prior code  
       uses: actions/checkout@v2
