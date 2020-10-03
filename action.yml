@@ -24,5 +24,5 @@ inputs:
     description: 'XRP Ledger server to use'
     default: 'test.xrp.xpring.io:50051'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'node12'
+  main: 'dist/index.js'
