@@ -25,4 +25,4 @@ inputs:
     default: 'test.xrp.xpring.io:50051'
 runs:
   using: 'node12'
-  main: 'pay_contributor.js'
+  main: 'dist/index.js'

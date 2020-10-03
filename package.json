@@ -26,5 +26,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "xpring-js": "^5.1.2"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.24.1"
   }
 }
