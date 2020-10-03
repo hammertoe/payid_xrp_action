@@ -9,7 +9,7 @@ async function run() {
     // Get our parameters from the environment
     const env = process.env
     const wallet_seed = process.env.INPUT_WALLET_SECRET
-    const environment = process.env.INPUT_ENVIRONMENT
+    const environment = process.env.INPUT_ENVIRONMENT.toLowerCase()
     const server = process.env.INPUT_SERVER
     const commitmsg = process.env.INPUT_COMMIT_LOG
     const amount = process.env.INPUT_AMOUNT
