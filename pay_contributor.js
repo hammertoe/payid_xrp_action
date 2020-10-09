@@ -2,6 +2,8 @@ const { PayIdClient, Wallet,
 	XrpClient, XrplNetwork,
 	XrpPayIdClient, XpringClient } = require('xpring-js')
 
+const core = require('@actions/core')
+
 require('dotenv').config()
 
 async function run() {
