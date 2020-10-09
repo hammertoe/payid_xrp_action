@@ -24,7 +24,7 @@ jobs:
         echo ::set-env name=commit_log::$(git log --format=%B ${{ github.event.before }}..${{ github.event.after }})
 
     - name: Run PayID
-      uses: hammertoe/payid_action@master
+      uses: hammertoe/payid_action@lookup-user
       with:
         wallet_secret: ${{ secrets.PAYID_WALLET_SECRET }}
         amount: 1000000
