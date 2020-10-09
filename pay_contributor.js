@@ -19,8 +19,8 @@ async function run() {
     const max_payout = process.env.INPUT_MAX_PAYOUT
 
     // If not commit message, then try to work out open opener of pull request
-    const myToken = core.getInput('myToken')
-    const octokit = github.getOctokit(myToken)
+    const token = core.getInput('repo-token')
+    const octokit = github.getOctokit(token)
 
     const context = github.context
     console.log(JSON.stringify(context, null, 4))
