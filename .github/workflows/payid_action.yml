@@ -26,7 +26,7 @@ jobs:
     - name: Run PayID
       uses: hammertoe/payid_action@lookup-user
       with:
-        repo-token: ${{secrets.GITHUB_TOKEN}}
+        repo_token: ${{secrets.GITHUB_TOKEN}}
         wallet_secret: ${{ secrets.PAYID_WALLET_SECRET }}
         amount: 1000000
         commit_log: ${{ env.commit_log }}

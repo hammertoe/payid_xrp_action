@@ -23,6 +23,15 @@ inputs:
   server:
     description: 'XRP Ledger server to use'
     default: 'test.xrp.xpring.io:50051'
+  dry_run:
+    description: 'Dry run. Do not actually make payment, but report what would be done'
+    default: true
+  repo_token:
+    description: 'Repository token'
+    required: true
+outputs:
+  message:
+    description: 'A message containing the payments made'
 runs:
   using: 'node12'
   main: 'dist/index.js'
