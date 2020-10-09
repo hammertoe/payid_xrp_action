@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/hammertoe/payid_xrp_action#readme",
   "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
     "dotenv": "^8.2.0",
     "xpring-js": "^5.1.2"
   },
