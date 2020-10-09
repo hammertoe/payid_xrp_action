@@ -3,6 +3,7 @@ const { PayIdClient, Wallet,
 	XrpPayIdClient, XpringClient } = require('xpring-js')
 
 const core = require('@actions/core')
+const github = require('@actions/github');
 
 require('dotenv').config()
 
@@ -17,6 +18,14 @@ async function run() {
     const amount = process.env.INPUT_AMOUNT
     const max_payout = process.env.INPUT_MAX_PAYOUT
 
+    // If not commit message, then try to work out open opener of pull request
+    const myToken = core.getInput('myToken')
+    const octokit = github.getOctokit(myToken)
+
+    const context = github.context
+    console.log(JSON.stringify(context, null, 4))
+
+    
     // Abort if we don't have a wallet secret
     if (wallet_seed === undefined) {
 	console.log("Missing INPUT_WALLET_SECRET")
